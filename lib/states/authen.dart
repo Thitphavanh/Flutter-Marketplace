@@ -12,9 +12,13 @@ class Authen extends StatefulWidget {
 class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: ShowImage(pathImage: MyConstant.image1),
+        child: Container(
+          width: size * 0.80,
+          child: ShowImage(pathImage: MyConstant.image1),
+        ),
       ),
     );
   }
