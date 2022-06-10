@@ -14,10 +14,11 @@ final Map<String, WidgetBuilder> map = {
   'riderService': (BuildContext context) => RiderService(),
 };
 
-String? intialRoute;
+String? intialRoutes;
 
 void main() {
-  intialRoute = MyConstant.routeAuthen;
+  intialRoutes = MyConstant.routeAuthen;
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: MyConstant.appName,
+      routes: map,
+      initialRoute: intialRoutes,
     );
   }
 }
