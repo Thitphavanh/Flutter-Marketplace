@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marketplace/utilities/my_constant.dart';
+import 'package:flutter_marketplace/widgets/show_image.dart';
 
 class Authen extends StatefulWidget {
   const Authen({Key? key}) : super(key: key);
@@ -10,6 +12,10 @@ class Authen extends StatefulWidget {
 class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: SafeArea(
+        child: ShowImage(pathImage: MyConstant.image1),
+      ),
+    );
   }
 }
