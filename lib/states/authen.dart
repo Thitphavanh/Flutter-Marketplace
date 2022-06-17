@@ -93,6 +93,20 @@ class _AuthenState extends State<Authen> {
           child: TextFormField(
             obscureText: statusRedEye,
             decoration: InputDecoration(
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    statusRedEye = !statusRedEye;
+                  });
+                },
+                icon: statusRedEye ? Icon(
+                  Icons.remove_red_eye,
+                  color: MyConstant.darkred,
+                ) : Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: MyConstant.darkred,
+                ), 
+              ),
               border: InputBorder.none,
               hintText: 'Password',
               icon: Icon(
