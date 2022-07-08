@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class MyConstant {
   // General
-  static String appName = 'MarketPlace';
+  static String appName = 'MARKETPLACE';
 
   // Router
   static String routeAuthen = '/authen';
   static String routeCreateAccount = '/createAccount';
-  static String routeBuyerService = 'buyerService';
-  static String routeSalerService = 'salerService';
-  static String routeRiderService = 'riderService';
+  static String routeBuyerService = '/buyerService';
+  static String routeSalerService = '/salerService';
+  static String routeRiderService = '/riderService';
 
   // Image
   static String image1 = 'images/image1.jpg';
@@ -19,9 +19,15 @@ class MyConstant {
   static String image5 = 'images/image5.jpg';
 
   // Color
+  static Color primaryWhite = const Color(0xFFFFFFFF);
+
   static Color primaryBlue = const Color(0xff87ceeb);
   static Color darkBlue = const Color(0xff080742);
   static Color lightBlue = const Color(0xff1e90ff);
+
+  static Color primaryOrange = const Color(0xfff8a56c);
+  static Color darkOrange = const Color(0xfff74525);
+  static Color lightOrange = const Color(0xfffec58a);
 
   static Color primaryRed = const Color(0xffd21502);
   static Color darkRed = const Color(0xff4c0805);
@@ -70,5 +76,14 @@ class MyConstant {
         fontSize: 14,
         color: darkBlue,
         fontWeight: FontWeight.normal,
+      );
+
+  ButtonStyle buttonStyle() => ElevatedButton.styleFrom(
+        primary: MyConstant.darkRed,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            20.0,
+          ),
+        ),
       );
 }

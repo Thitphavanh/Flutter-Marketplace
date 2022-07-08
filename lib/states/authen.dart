@@ -18,18 +18,64 @@ class _AuthenState extends State<Authen> {
     double size = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            const SizedBox(height: 30.0),
-            buildImage(size),
-            const SizedBox(height: 16.0),
-            buildAppName(),
-            const SizedBox(height: 10.0),
-            buildUser(size),
-            buildPassword(size),
-          ],
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: ListView(
+            children: [
+              const SizedBox(height: 30.0),
+              buildImage(size),
+              const SizedBox(height: 30.0),
+              buildAppName(),
+              const SizedBox(height: 10.0),
+              buildUser(size),
+              buildPassword(size),
+              const SizedBox(height: 10.0),
+              buildLogin(size),
+              buildCreateAccount(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Row buildCreateAccount() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ShowTitle(
+          title: 'ບໍ່ມີບັນຊີ ?',
+          textStyle: MyConstant().font3Style(),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pushNamed(
+            context,
+            MyConstant.routeCreateAccount,
+          ),
+          child: Text(
+            'ສ້າງບັນຊີຜູ້ໃຊ້',
+            style: TextStyle(
+              color: MyConstant.darkRed,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row buildLogin(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: size * 0.9,
+          child: ElevatedButton(
+            style: MyConstant().buttonStyle(),
+            onPressed: () {},
+            child: const Text('LOGIN'),
+          ),
+        ),
+      ],
     );
   }
 

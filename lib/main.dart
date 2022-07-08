@@ -8,18 +8,18 @@ import 'package:flutter_marketplace/utilities/my_constant.dart';
 
 
 final Map<String, WidgetBuilder> map = {
-  '/authen': (BuildContext context) => Authen(),
-  '/createAccount': (BuildContext context) => CreateAccount(),
-  'buyerService': (BuildContext context) => BuyerService(),
-  'salerService': (BuildContext context) => SalerService(),
-  'riderService': (BuildContext context) => RiderService(),
+  '/authen': (BuildContext context) => const Authen(),
+  '/createAccount': (BuildContext context) => const CreateAccount(),
+  '/buyerService': (BuildContext context) => const BuyerService(),
+  '/salerService': (BuildContext context) => const SalerService(),
+  '/riderService': (BuildContext context) => const RiderService(),
 };
 
 String? intialRoutes;
 
 void main() {
   intialRoutes = MyConstant.routeAuthen;
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
