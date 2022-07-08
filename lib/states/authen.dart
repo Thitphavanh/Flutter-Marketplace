@@ -39,7 +39,9 @@ class _AuthenState extends State<Authen> {
       children: [
         Container(
           width: size * 0.9,
-          child: ShowImage(pathImage: MyConstant.image1),
+          child: ShowImage(
+            pathImage: MyConstant.image1,
+          ),
         ),
       ],
     );
@@ -53,8 +55,9 @@ class _AuthenState extends State<Authen> {
           margin: const EdgeInsets.only(top: 16.0),
           padding: const EdgeInsets.only(left: 20.0),
           width: size * 0.9,
+          // ignore: sort_child_properties_last
           child: TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: 'User',
               icon: Icon(
@@ -90,6 +93,7 @@ class _AuthenState extends State<Authen> {
           margin: const EdgeInsets.only(top: 16.0),
           padding: const EdgeInsets.only(left: 20.0),
           width: size * 0.9,
+          // ignore: sort_child_properties_last
           child: TextFormField(
             obscureText: statusRedEye,
             decoration: InputDecoration(
@@ -99,17 +103,19 @@ class _AuthenState extends State<Authen> {
                     statusRedEye = !statusRedEye;
                   });
                 },
-                icon: statusRedEye ? Icon(
-                  Icons.remove_red_eye,
-                  color: MyConstant.darkred,
-                ) : Icon(
-                  Icons.remove_red_eye_outlined,
-                  color: MyConstant.darkred,
-                ), 
+                icon: statusRedEye
+                    ? Icon(
+                        Icons.remove_red_eye,
+                        color: MyConstant.darkRed,
+                      )
+                    : Icon(
+                        Icons.remove_red_eye_outlined,
+                        color: MyConstant.darkRed,
+                      ),
               ),
               border: InputBorder.none,
               hintText: 'Password',
-              icon: Icon(
+              icon: const Icon(
                 Icons.lock,
                 color: Colors.black,
               ),
@@ -140,7 +146,7 @@ class _AuthenState extends State<Authen> {
       children: [
         ShowTitle(
           title: MyConstant.appName,
-          textStyle: MyConstant().font1redstyle(),
+          textStyle: MyConstant().font1RedStyle(),
         ),
       ],
     );

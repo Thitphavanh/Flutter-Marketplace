@@ -19,56 +19,56 @@ class MyConstant {
   static String image5 = 'images/image5.jpg';
 
   // Color
-  static Color primaryblue = const Color(0xff87ceeb);
-  static Color darkblue = const Color(0xff080742);
-  static Color lightlue = const Color(0xff1e90ff);
+  static Color primaryBlue = const Color(0xff87ceeb);
+  static Color darkBlue = const Color(0xff080742);
+  static Color lightBlue = const Color(0xff1e90ff);
 
-  static Color primaryred = const Color(0xffd21502);
-  static Color darkred = const Color(0xff4c0805);
-  static Color lightred = const Color(0xff7f1019);
+  static Color primaryRed = const Color(0xffd21502);
+  static Color darkRed = const Color(0xff4c0805);
+  static Color lightRed = const Color(0xff7f1019);
 
-  TextStyle font1style() => const TextStyle(
+  TextStyle font1Style() => const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
       );
-  TextStyle font2style() => const TextStyle(
+  TextStyle font2Style() => const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w700,
       );
-  TextStyle font3style() => const TextStyle(
+  TextStyle font3Style() => const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle font1redstyle() => TextStyle(
+  TextStyle font1RedStyle() => TextStyle(
         fontSize: 24,
-        color: darkred,
+        color: darkRed,
         fontWeight: FontWeight.bold,
       );
-  TextStyle font2redstyle() => TextStyle(
+  TextStyle font2RedStyle() => TextStyle(
         fontSize: 18,
-        color: darkred,
+        color: darkRed,
         fontWeight: FontWeight.w700,
       );
-  TextStyle font3redstyle() => TextStyle(
+  TextStyle font3RedStyle() => TextStyle(
         fontSize: 14,
-        color: darkred,
+        color: darkRed,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle font1bluestyle() => TextStyle(
+  TextStyle font1BlueStyle() => TextStyle(
         fontSize: 24,
-        color: darkred,
+        color: darkBlue,
         fontWeight: FontWeight.bold,
       );
-  TextStyle font2bluestyle() => TextStyle(
+  TextStyle font2BlueStyle() => TextStyle(
         fontSize: 18,
-        color: darkred,
+        color: darkBlue,
         fontWeight: FontWeight.w700,
       );
-  TextStyle font3bluestyle() => TextStyle(
+  TextStyle font3BlueStyle() => TextStyle(
         fontSize: 14,
-        color: darkred,
+        color: darkBlue,
         fontWeight: FontWeight.normal,
       );
 }
