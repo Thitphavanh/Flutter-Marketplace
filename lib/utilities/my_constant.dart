@@ -29,9 +29,9 @@ class MyConstant {
   static Color darkOrange = const Color(0xfff74525);
   static Color lightOrange = const Color(0xfffec58a);
 
-  static Color primaryRed = const Color(0xffd21502);
-  static Color darkRed = const Color(0xff4c0805);
-  static Color lightRed = const Color(0xff7f1019);
+  static Color primaryBlack = Color.fromARGB(255, 5, 1, 0);
+  static Color darkBlack = Color.fromARGB(255, 24, 20, 20);
+  static Color lightBlack = Color.fromARGB(255, 51, 49, 49);
 
   TextStyle font1Style() => const TextStyle(
         fontSize: 24,
@@ -48,17 +48,17 @@ class MyConstant {
 
   TextStyle font1RedStyle() => TextStyle(
         fontSize: 24,
-        color: darkRed,
+        color: darkBlack,
         fontWeight: FontWeight.bold,
       );
   TextStyle font2RedStyle() => TextStyle(
         fontSize: 18,
-        color: darkRed,
+        color: darkBlack,
         fontWeight: FontWeight.w700,
       );
   TextStyle font3RedStyle() => TextStyle(
         fontSize: 14,
-        color: darkRed,
+        color: darkBlack,
         fontWeight: FontWeight.normal,
       );
 
@@ -79,7 +79,7 @@ class MyConstant {
       );
 
   ButtonStyle buttonStyle() => ElevatedButton.styleFrom(
-        primary: MyConstant.darkRed,
+        primary: MyConstant.darkBlack,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             20.0,

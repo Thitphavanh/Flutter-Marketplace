@@ -55,7 +55,7 @@ class _AuthenState extends State<Authen> {
           child: Text(
             'ສ້າງບັນຊີຜູ້ໃຊ້',
             style: TextStyle(
-              color: MyConstant.darkRed,
+              color: MyConstant.darkOrange
             ),
           ),
         ),
@@ -152,11 +152,11 @@ class _AuthenState extends State<Authen> {
                 icon: statusRedEye
                     ? Icon(
                         Icons.remove_red_eye,
-                        color: MyConstant.darkRed,
+                        color: MyConstant.darkBlack
                       )
                     : Icon(
                         Icons.remove_red_eye_outlined,
-                        color: MyConstant.darkRed,
+                        color: MyConstant.darkBlack,
                       ),
               ),
               border: InputBorder.none,
