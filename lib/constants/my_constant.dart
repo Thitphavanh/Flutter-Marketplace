@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyConstant {
   // General
-  static String appName = 'MARKETPLACE';
+  static String appName = 'PHENOMENAL INC.';
 
   // Router
   static String routeAuthen = '/authen';
@@ -17,6 +17,7 @@ class MyConstant {
   static String image3 = 'images/image3.jpg';
   static String image4 = 'images/image4.jpg';
   static String image5 = 'images/image5.jpg';
+  static String avatar = 'images/avatar.png';
 
   // Color
   static Color primaryWhite = const Color(0xFFFFFFFF);
@@ -29,9 +30,9 @@ class MyConstant {
   static Color darkOrange = const Color(0xfff74525);
   static Color lightOrange = const Color(0xfffec58a);
 
-  static Color primaryBlack = Color.fromARGB(255, 5, 1, 0);
-  static Color darkBlack = Color.fromARGB(255, 24, 20, 20);
-  static Color lightBlack = Color.fromARGB(255, 51, 49, 49);
+  static Color primaryBlack = const Color.fromARGB(255, 5, 1, 0);
+  static Color darkBlack = const Color.fromARGB(255, 32, 27, 27);
+  static Color lightBlack = const Color.fromARGB(255, 51, 49, 49);
 
   TextStyle font1Style() => const TextStyle(
         fontSize: 24,
@@ -79,7 +80,7 @@ class MyConstant {
       );
 
   ButtonStyle buttonStyle() => ElevatedButton.styleFrom(
-        primary: MyConstant.darkBlack,
+        backgroundColor: MyConstant.darkBlack,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             20.0,

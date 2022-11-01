@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marketplace/utilities/my_constant.dart';
 
 class ShowImage extends StatelessWidget {
   final String pathImage;

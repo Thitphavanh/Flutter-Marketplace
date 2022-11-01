@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marketplace/utilities/my_constant.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
+
+import '../constants/my_constant.dart';
 
 class Authen extends StatefulWidget {
   const Authen({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _AuthenState extends State<Authen> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          behavior: HitTestBehavior.opaque,
           child: ListView(
             children: [
               const SizedBox(height: 30.0),
@@ -27,9 +29,9 @@ class _AuthenState extends State<Authen> {
               const SizedBox(height: 30.0),
               buildAppName(),
               const SizedBox(height: 10.0),
-              buildUser(size),
+              buildEmail(size),
               buildPassword(size),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 60.0),
               buildLogin(size),
               buildCreateAccount(),
             ],
@@ -44,7 +46,7 @@ class _AuthenState extends State<Authen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ShowTitle(
-          title: 'ບໍ່ມີບັນຊີ ?',
+          title: 'None Have Acount?',
           textStyle: MyConstant().font3Style(),
         ),
         TextButton(
@@ -53,10 +55,8 @@ class _AuthenState extends State<Authen> {
             MyConstant.routeCreateAccount,
           ),
           child: Text(
-            'ສ້າງບັນຊີຜູ້ໃຊ້',
-            style: TextStyle(
-              color: MyConstant.darkOrange
-            ),
+            'Create Acount',
+            style: TextStyle(color: MyConstant.darkOrange),
           ),
         ),
       ],
@@ -68,6 +68,7 @@ class _AuthenState extends State<Authen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
+          // margin: const EdgeInsets.symmetric(vertical: 30),
           width: size * 0.9,
           child: ElevatedButton(
             style: MyConstant().buttonStyle(),
@@ -93,7 +94,7 @@ class _AuthenState extends State<Authen> {
     );
   }
 
-  Row buildUser(double size) {
+  Row buildEmail(double size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -105,9 +106,9 @@ class _AuthenState extends State<Authen> {
           child: TextFormField(
             decoration: const InputDecoration(
               border: InputBorder.none,
-              hintText: 'User',
+              hintText: 'email',
               icon: Icon(
-                Icons.person,
+                Icons.email,
                 color: Colors.black,
               ),
             ),
@@ -150,17 +151,14 @@ class _AuthenState extends State<Authen> {
                   });
                 },
                 icon: statusRedEye
-                    ? Icon(
-                        Icons.remove_red_eye,
-                        color: MyConstant.darkBlack
-                      )
+                    ? Icon(Icons.remove_red_eye, color: MyConstant.darkBlack)
                     : Icon(
                         Icons.remove_red_eye_outlined,
                         color: MyConstant.darkBlack,
                       ),
               ),
               border: InputBorder.none,
-              hintText: 'Password',
+              hintText: 'password',
               icon: const Icon(
                 Icons.lock,
                 color: Colors.black,
