@@ -71,7 +71,12 @@ class _AuthenState extends State<Authen> {
           // margin: const EdgeInsets.symmetric(vertical: 30),
           width: size * 0.9,
           child: ElevatedButton(
-            style: MyConstant().buttonStyle(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: MyConstant.darkBlack,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
             onPressed: () {},
             child: const Text('LOGIN'),
           ),
@@ -116,7 +121,7 @@ class _AuthenState extends State<Authen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
@@ -168,7 +173,7 @@ class _AuthenState extends State<Authen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(

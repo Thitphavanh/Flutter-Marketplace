@@ -7,7 +7,6 @@ import 'package:flutter_marketplace/states/saler_service.dart';
 
 import 'constants/my_constant.dart';
 
-
 final Map<String, WidgetBuilder> map = {
   '/authen': (BuildContext context) => const Authen(),
   '/createAccount': (BuildContext context) => const CreateAccount(),
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: MyConstant.appName,
       routes: map,
       initialRoute: intialRoutes,
@@ -37,4 +37,4 @@ class MyApp extends StatelessWidget {
 }
 
 
-// EP12.1 วีดีโอ สอนเขียนแอพ สั่งซื้อของ ออนไลด์ เรื่อง การใช้งาน RadioListtile
+// EP14 วีดีโอ สอนเขียนแอพ สั่งซื้อของ ออนไลด์ เรื่อง การถ่ายรูป เลือกรูปจาก Gallery โดยใช้ ImagePicker

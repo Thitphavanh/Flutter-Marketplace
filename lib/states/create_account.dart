@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants/my_constant.dart';
 
@@ -13,6 +16,7 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   String? typeUser;
+  File? file;
 
   @override
   Widget build(BuildContext context) {
@@ -35,32 +39,8 @@ class _CreateAccountState extends State<CreateAccount> {
           ),
           children: [
             buildTitle('ຂໍ້ມູນທົ່ວໄປ:'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add_a_photo,
-                    size: 28,
-                    color: Colors.black,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 16.0),
-                  width: size * 0.3,
-                  child: ShowImage(pathImage: MyConstant.avatar),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add_photo_alternate,
-                    size: 28,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
+            buildImageProfile(size),
+            const SizedBox(height: 8.0),
             buildName(size),
             const SizedBox(height: 8.0),
             buildEmail(size),
@@ -78,6 +58,53 @@ class _CreateAccountState extends State<CreateAccount> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> chooseImage(ImageSource source) async {
+    try {
+      var result = await ImagePicker().pickImage(
+        source: source,
+        maxWidth: 800,
+        maxHeight: 800,
+      );
+      setState(() {
+        file = File(result!.path);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Row buildImageProfile(double size) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        IconButton(
+          onPressed: () => chooseImage(ImageSource.camera),
+          icon: const Icon(
+            Icons.add_a_photo,
+            size: 28,
+            color: Colors.black,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 16.0),
+          width: size * 0.3,
+          child: file == null
+              ? ShowImage(pathImage: MyConstant.avatar)
+              : Image.file(file!),
+        ),
+        IconButton(
+          onPressed: () => chooseImage(ImageSource.gallery),
+          icon: const Icon(
+            Icons.add_photo_alternate,
+            size: 28,
+            color: Colors.black,
+          ),
+        ),
+      ],
     );
   }
 
@@ -160,7 +187,7 @@ class _CreateAccountState extends State<CreateAccount> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
@@ -200,7 +227,7 @@ class _CreateAccountState extends State<CreateAccount> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
@@ -239,7 +266,7 @@ class _CreateAccountState extends State<CreateAccount> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
@@ -278,7 +305,7 @@ class _CreateAccountState extends State<CreateAccount> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
@@ -317,7 +344,7 @@ class _CreateAccountState extends State<CreateAccount> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              20.0,
+              8.0,
             ),
             boxShadow: [
               BoxShadow(
