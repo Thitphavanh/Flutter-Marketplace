@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constants/my_constant.dart';
+import '../utils/my_dialog.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -17,6 +19,25 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   String? typeUser;
   File? file;
+
+  @override
+  void initState() {
+    findLaLng();
+    super.initState();
+  }
+
+  Future<void> findLaLng() async {
+    final bool locationService;
+    final LocationPermission locationPermission;
+
+    locationService = await Geolocator.isLocationServiceEnabled();
+    if (locationService) {
+      print('Service location open');
+    } else {
+      // print('Service location close');
+      MyDialog().alertLocationService(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -371,6 +392,4 @@ class _CreateAccountState extends State<CreateAccount> {
       ),
     );
   }
-
-  buildAvatar() {}
 }

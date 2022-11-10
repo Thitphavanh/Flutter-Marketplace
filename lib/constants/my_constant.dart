@@ -18,6 +18,8 @@ class MyConstant {
   static String image4 = 'images/image4.jpg';
   static String image5 = 'images/image5.jpg';
   static String avatar = 'images/avatar.png';
+  static String avatar1 = 'images/avatar1.png';
+  static String error = 'images/error.png';
 
   // Color
   static Color primaryWhite = const Color(0xFFFFFFFF);
