@@ -7,7 +7,8 @@ import 'package:flutter_marketplace/widgets/show_title.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MyDialog {
-  Future<void> alertLocationService(BuildContext context) async {
+  Future<void> alertLocationService(
+      BuildContext context, String title, String message) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -15,11 +16,11 @@ class MyDialog {
           title: ListTile(
             leading: ShowImage(pathImage: MyConstant.avatar1),
             title: ShowTitle(
-              title: 'Location service close!',
+              title: title,
               textStyle: MyConstant().font2Style(),
             ),
             subtitle: ShowTitle(
-              title: 'Please open your location service',
+              title: message,
               textStyle: MyConstant().font3Style(),
             ),
           ),

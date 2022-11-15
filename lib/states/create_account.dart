@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
+import 'package:flutter_marketplace/widgets/show_progress.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,23 +20,67 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   String? typeUser;
   File? file;
+  double? lat, lng;
 
   @override
   void initState() {
-    findLaLng();
+    checkPermission();
     super.initState();
   }
 
-  Future<void> findLaLng() async {
-    final bool locationService;
-    final LocationPermission locationPermission;
+  Future<void> checkPermission() async {
+    bool locationService;
+    LocationPermission locationPermission;
 
     locationService = await Geolocator.isLocationServiceEnabled();
     if (locationService) {
-      print('Service location open');
+      locationPermission = await Geolocator.checkPermission();
+      if (locationPermission == LocationPermission.denied) {
+        locationPermission = await Geolocator.requestPermission();
+        if (locationPermission == LocationPermission.deniedForever) {
+          // ignore: use_build_context_synchronously
+          MyDialog().alertLocationService(
+              context,
+              'Unable to access your location',
+              'Please to share your location');
+        } else {
+          findLaLng();
+        }
+      } else {
+        if (locationPermission == LocationPermission.deniedForever) {
+          // ignore: use_build_context_synchronously
+          MyDialog().alertLocationService(
+              context,
+              'Unable to access your location',
+              'Please to share your location');
+        } else {
+          findLaLng();
+        }
+      }
     } else {
-      // print('Service location close');
-      MyDialog().alertLocationService(context);
+      // ignore: use_build_context_synchronously
+      MyDialog().alertLocationService(context, 'Location service close!',
+          'Please open your location service');
+    }
+  }
+
+  Future<void> findLaLng() async {
+    // print('findLaLng ==> work');
+    Position? position = await findPosition();
+    setState(() {
+      lat = position!.latitude;
+      lng = position.longitude;
+      print('lat = $lat, lng = $lng');
+    });
+  }
+
+  Future<Position?> findPosition() async {
+    Position position;
+    try {
+      position = await Geolocator.getCurrentPosition();
+      return position;
+    } catch (e) {
+      return null;
     }
   }
 
@@ -76,11 +121,21 @@ class _CreateAccountState extends State<CreateAccount> {
             buildRadioBuyer(),
             buildRadioSeller(),
             buildRadioRider(),
+            buildTitle('ສະແດງທີ່ຢູ່ຂອງທ່ານ:'),
+            buildMap(),
           ],
         ),
       ),
     );
   }
+
+  Widget buildMap() => Container(
+        // color: Colors.grey,
+        width: double.infinity,
+        height: 250,
+        child:
+            lat == null ? const ShowProgress() : Text('Lat = $lat, Lng = $lng'),
+      );
 
   Future<void> chooseImage(ImageSource source) async {
     try {
