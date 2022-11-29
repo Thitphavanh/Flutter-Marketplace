@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_progress.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../constants/my_constant.dart';
 import '../utils/my_dialog.dart';
 
@@ -129,7 +127,7 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Widget buildMap() => Container(
+  Widget buildMap() => SizedBox(
         // color: Colors.grey,
         width: double.infinity,
         height: 250,

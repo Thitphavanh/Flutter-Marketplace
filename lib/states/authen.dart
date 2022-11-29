@@ -67,7 +67,7 @@ class _AuthenState extends State<Authen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           // margin: const EdgeInsets.symmetric(vertical: 30),
           width: size * 0.9,
           child: ElevatedButton(
@@ -89,7 +89,7 @@ class _AuthenState extends State<Authen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           width: size * 0.9,
           child: ShowImage(
             pathImage: MyConstant.image1,
