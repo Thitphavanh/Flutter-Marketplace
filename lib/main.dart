@@ -37,4 +37,4 @@ class MyApp extends StatelessWidget {
 }
 
 
-// EP14 วีดีโอ สอนเขียนแอพ สั่งซื้อของ ออนไลด์ เรื่อง การถ่ายรูป เลือกรูปจาก Gallery โดยใช้ ImagePicker
+// https://www.youtube.com/watch?v=uaXcBcsCD2I&list=PLHk7DPiGKGNBDt1rPlVPCDVlV0ggqzbNy&index=25

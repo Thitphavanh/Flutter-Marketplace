@@ -24,7 +24,7 @@ class _AuthenState extends State<Authen> {
           behavior: HitTestBehavior.opaque,
           child: ListView(
             children: [
-              const SizedBox(height: 30.0),
+              const SizedBox(height: 120.0),
               buildImage(size),
               const SizedBox(height: 30.0),
               buildAppName(),

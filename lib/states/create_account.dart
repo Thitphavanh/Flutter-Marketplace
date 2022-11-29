@@ -4,6 +4,7 @@ import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_progress.dart';
 import 'package:flutter_marketplace/widgets/show_title.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../constants/my_constant.dart';
 import '../utils/my_dialog.dart';
@@ -121,18 +122,38 @@ class _CreateAccountState extends State<CreateAccount> {
             buildRadioRider(),
             buildTitle('ສະແດງທີ່ຢູ່ຂອງທ່ານ:'),
             buildMap(),
+            const SizedBox(height: 50.0),
           ],
         ),
       ),
     );
   }
 
+  Set<Marker> setMarker() => <Marker>{
+        Marker(
+          markerId: const MarkerId('id'),
+          position: LatLng(lat!, lng!),
+          infoWindow: InfoWindow(
+            title: 'ທີ່ຢູ່ຂອງທ່ານ',
+            snippet: 'Lat = $lat, Lng = $lng',
+          ),
+        ),
+      };
+
   Widget buildMap() => SizedBox(
         // color: Colors.grey,
         width: double.infinity,
         height: 250,
-        child:
-            lat == null ? const ShowProgress() : Text('Lat = $lat, Lng = $lng'),
+        child: lat == null
+            ? const ShowProgress()
+            : GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(lat!, lng!),
+                  zoom: 16.0,
+                ),
+                onMapCreated: (controller) {},
+                markers: setMarker(),
+              ),
       );
 
   Future<void> chooseImage(ImageSource source) async {
