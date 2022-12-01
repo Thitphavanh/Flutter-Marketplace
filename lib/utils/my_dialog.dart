@@ -37,4 +37,33 @@ class MyDialog {
       },
     );
   }
+
+  Future<void> normalDialog(
+      BuildContext context, String title, String message) async {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: ListTile(
+          leading: ShowImage(pathImage: MyConstant.error),
+          title: ShowTitle(
+            title: title,
+            textStyle: MyConstant().font2Style(),
+          ),
+          subtitle: ShowTitle(
+            title: message,
+            textStyle: MyConstant().font3Style(),
+          ),
+        ),
+        children: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'OK',
+              style: TextStyle(color: MyConstant.darkBlack),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

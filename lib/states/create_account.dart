@@ -20,6 +20,7 @@ class _CreateAccountState extends State<CreateAccount> {
   String? typeUser;
   File? file;
   double? lat, lng;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -69,7 +70,7 @@ class _CreateAccountState extends State<CreateAccount> {
     setState(() {
       lat = position!.latitude;
       lng = position.longitude;
-      print('lat = $lat, lng = $lng');
+      // print('lat = $lat, lng = $lng');
     });
   }
 
@@ -88,6 +89,9 @@ class _CreateAccountState extends State<CreateAccount> {
     double size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          buildIconButtonSave(),
+        ],
         centerTitle: true,
         elevation: 0,
         backgroundColor: MyConstant.primaryWhite,
@@ -97,34 +101,79 @@ class _CreateAccountState extends State<CreateAccount> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         behavior: HitTestBehavior.opaque,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 16.0,
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                buildTitle('ຂໍ້ມູນທົ່ວໄປ:', size),
+                buildImageProfile(size),
+                const SizedBox(height: 8.0),
+                buildName(size),
+                const SizedBox(height: 8.0),
+                buildEmail(size),
+                const SizedBox(height: 8.0),
+                buildPassword(size),
+                const SizedBox(height: 8.0),
+                buildPhone(size),
+                const SizedBox(height: 8.0),
+                buildAddress(size),
+                const SizedBox(height: 16.0),
+                buildTitle('ຊະນິດຂອງຜູ້ໃຊ້:', size),
+                buildRadioBuyer(),
+                buildRadioSeller(),
+                buildRadioRider(),
+                buildTitle('ສະແດງທີ່ຢູ່ຂອງທ່ານ:', size),
+                buildMap(size),
+                const SizedBox(height: 50.0),
+                buildButtonSave(size),
+                const SizedBox(height: 50.0),
+              ],
+            ),
           ),
-          children: [
-            buildTitle('ຂໍ້ມູນທົ່ວໄປ:'),
-            buildImageProfile(size),
-            const SizedBox(height: 8.0),
-            buildName(size),
-            const SizedBox(height: 8.0),
-            buildEmail(size),
-            const SizedBox(height: 8.0),
-            buildPassword(size),
-            const SizedBox(height: 8.0),
-            buildPhone(size),
-            const SizedBox(height: 8.0),
-            buildAddress(size),
-            const SizedBox(height: 16.0),
-            buildTitle('ຊະນິດຂອງຜູ້ໃຊ້:'),
-            buildRadioBuyer(),
-            buildRadioSeller(),
-            buildRadioRider(),
-            buildTitle('ສະແດງທີ່ຢູ່ຂອງທ່ານ:'),
-            buildMap(),
-            const SizedBox(height: 50.0),
-          ],
         ),
+      ),
+    );
+  }
+
+  IconButton buildIconButtonSave() {
+    return IconButton(
+      onPressed: () {
+        if (formKey.currentState!.validate()) {
+          if (typeUser == null) {
+            MyDialog().normalDialog(
+                context, 'ທ່ານຍັງບໍ່ໄດ້ເລືອກ', 'ກະລຸນາເລືອກ ຊະນິດຜູ້ໃຊ້ງານ');
+          } else {
+            // print('Process insert to database');
+          }
+        }
+      },
+      icon: const Icon(Icons.file_download_outlined),
+    );
+  }
+
+  SizedBox buildButtonSave(double size) {
+    return SizedBox(
+      width: size * 0.9,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MyConstant.darkBlack,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            if (typeUser == null) {
+              print('Non choose type user');
+              MyDialog().normalDialog(
+                  context, 'ທ່ານຍັງບໍ່ໄດ້ເລືອກ', 'ກະລຸນາເລືອກ ຊະນິດຜູ້ໃຊ້ງານ');
+            } else {
+              // print('Process insert to database');
+            }
+          }
+        },
+        child: const Text('SAVE'),
       ),
     );
   }
@@ -140,9 +189,10 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
       };
 
-  Widget buildMap() => SizedBox(
+  Widget buildMap(double size) => SizedBox(
+        width: size * 0.9,
         // color: Colors.grey,
-        width: double.infinity,
+
         height: 250,
         child: lat == null
             ? const ShowProgress()
@@ -269,6 +319,12 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            keyboardType: TextInputType.name,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'ກະລຸນາຕື່ມ ຊື່ຂອງທ່ານ';
+              } else {}
+            },
             decoration: const InputDecoration(
               border: InputBorder.none,
               labelText: 'name',
@@ -308,6 +364,12 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            keyboardType: TextInputType.streetAddress,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'ກະລຸນາຕື່ມ ທີ່ຢູ່ຂອງທ່ານ';
+              } else {}
+            },
             maxLines: 3,
             decoration: const InputDecoration(
               border: InputBorder.none,
@@ -348,6 +410,12 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'ກະລຸນາຕື່ມ ທີ່ຢູ່ອີເມລ໌ຂອງທ່ານ';
+              } else {}
+            },
             decoration: const InputDecoration(
               border: InputBorder.none,
               labelText: 'email',
@@ -387,6 +455,12 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            keyboardType: TextInputType.phone,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'ກະລຸນາຕື່ມ ເບີໂທລະສັບຂອງທ່ານ';
+              } else {}
+            },
             decoration: const InputDecoration(
               border: InputBorder.none,
               labelText: 'phone',
@@ -426,6 +500,12 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            keyboardType: TextInputType.visiblePassword,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'ກະລຸນາຕື່ມ ລະຫັດຜ່ານຂອງທ່ານ';
+              } else {}
+            },
             decoration: const InputDecoration(
               border: InputBorder.none,
               labelText: 'password',
@@ -455,8 +535,9 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Container buildTitle(String title) {
+  Container buildTitle(String title, double size) {
     return Container(
+      width: size * 0.9,
       margin: const EdgeInsets.symmetric(
         vertical: 8.0,
       ),

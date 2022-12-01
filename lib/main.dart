@@ -4,7 +4,6 @@ import 'package:flutter_marketplace/states/buyer_service.dart';
 import 'package:flutter_marketplace/states/create_account.dart';
 import 'package:flutter_marketplace/states/rider_service.dart';
 import 'package:flutter_marketplace/states/saler_service.dart';
-
 import 'constants/my_constant.dart';
 
 final Map<String, WidgetBuilder> map = {
