@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
 import 'package:flutter_marketplace/widgets/show_progress.dart';
@@ -21,6 +22,15 @@ class _CreateAccountState extends State<CreateAccount> {
   File? file;
   double? lat, lng;
   final formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  String avatar = '';
+
+  final height = 8.0;
 
   @override
   void initState() {
@@ -108,15 +118,15 @@ class _CreateAccountState extends State<CreateAccount> {
               children: [
                 buildTitle('ຂໍ້ມູນທົ່ວໄປ:', size),
                 buildImageProfile(size),
-                const SizedBox(height: 8.0),
+                SizedBox(height: height),
+                buildUser(size),
+                SizedBox(height: height),
                 buildName(size),
-                const SizedBox(height: 8.0),
-                buildEmail(size),
-                const SizedBox(height: 8.0),
+                SizedBox(height: height),
                 buildPassword(size),
-                const SizedBox(height: 8.0),
+                SizedBox(height: height),
                 buildPhone(size),
-                const SizedBox(height: 8.0),
+                SizedBox(height: height),
                 buildAddress(size),
                 const SizedBox(height: 16.0),
                 buildTitle('ຊະນິດຂອງຜູ້ໃຊ້:', size),
@@ -165,17 +175,45 @@ class _CreateAccountState extends State<CreateAccount> {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             if (typeUser == null) {
-              print('Non choose type user');
               MyDialog().normalDialog(
                   context, 'ທ່ານຍັງບໍ່ໄດ້ເລືອກ', 'ກະລຸນາເລືອກ ຊະນິດຜູ້ໃຊ້ງານ');
             } else {
               // print('Process insert to database');
+              uploadPictureAndInsertData();
             }
           }
         },
         child: const Text('SAVE'),
       ),
     );
+  }
+
+  Future<void> uploadPictureAndInsertData() async {
+    String name = nameController.text;
+    String user = userController.text;
+    String password = passwordController.text;
+    String phone = phoneController.text;
+    String address = addressController.text;
+
+    String path =
+        '${MyConstant.domain}/marketplace/getUserWhereUser.php?isAdd=true&user=$user';
+    await Dio().get(path).then((value) {
+      // print("value => $value");
+      if (value.toString() == 'null') {
+        print("User: OK");
+        if (file == null) {
+          processInsertMySQL();
+        } else {
+           print("Process upload Avatar");
+        }
+      } else {
+        MyDialog().normalDialog(context, "User false!", "Please change user");
+      }
+    });
+  }
+
+  Future<void> processInsertMySQL() async {
+    print("Process work");
   }
 
   Set<Marker> setMarker() => <Marker>{
@@ -319,6 +357,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            controller: nameController,
             keyboardType: TextInputType.name,
             validator: (value) {
               if (value!.isEmpty) {
@@ -364,6 +403,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            controller: addressController,
             keyboardType: TextInputType.streetAddress,
             validator: (value) {
               if (value!.isEmpty) {
@@ -400,7 +440,7 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Row buildEmail(double size) {
+  Row buildUser(double size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -410,6 +450,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            controller: userController,
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value!.isEmpty) {
@@ -418,10 +459,10 @@ class _CreateAccountState extends State<CreateAccount> {
             },
             decoration: const InputDecoration(
               border: InputBorder.none,
-              labelText: 'email',
+              labelText: 'user',
               labelStyle: TextStyle(color: Colors.black),
               icon: Icon(
-                Icons.email,
+                Icons.admin_panel_settings_sharp,
                 color: Colors.black,
               ),
             ),
@@ -455,6 +496,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            controller: phoneController,
             keyboardType: TextInputType.phone,
             validator: (value) {
               if (value!.isEmpty) {
@@ -500,6 +542,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size * 0.9,
           // ignore: sort_child_properties_last
           child: TextFormField(
+            controller: passwordController,
             keyboardType: TextInputType.visiblePassword,
             validator: (value) {
               if (value!.isEmpty) {
