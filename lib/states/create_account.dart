@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marketplace/widgets/show_image.dart';
@@ -27,7 +28,6 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-
   String avatar = '';
 
   final height = 8.0;
@@ -155,6 +155,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 context, 'ທ່ານຍັງບໍ່ໄດ້ເລືອກ', 'ກະລຸນາເລືອກ ຊະນິດຜູ້ໃຊ້ງານ');
           } else {
             // print('Process insert to database');
+            uploadPictureAndInsertData();
           }
         }
       },
@@ -197,14 +198,39 @@ class _CreateAccountState extends State<CreateAccount> {
 
     String path =
         '${MyConstant.domain}/marketplace/getUserWhereUser.php?isAdd=true&user=$user';
-    await Dio().get(path).then((value) {
-      // print("value => $value");
+    await Dio().get(path).then((value) async {
       if (value.toString() == 'null') {
-        print("User: OK");
         if (file == null) {
-          processInsertMySQL();
+          processInsertMySQL(
+            name: name,
+            address: address,
+            phone: phone,
+            user: user,
+            password: password,
+          );
         } else {
-           print("Process upload Avatar");
+          String apiSaveAvatar =
+              "${MyConstant.domain}/marketplace/saveAvatar.php";
+
+          int i = Random().nextInt(100000);
+          String nameAvatar = 'avatar$i.jpg';
+          Map<String, dynamic> map = {};
+          map['file'] =
+              await MultipartFile.fromFile(file!.path, filename: nameAvatar);
+          FormData data = FormData.fromMap(
+            map,
+          );
+
+          await Dio().post(apiSaveAvatar, data: data).then((value) {
+            avatar = "/marketplace/avatar/$nameAvatar";
+            processInsertMySQL(
+              name: name,
+              address: address,
+              phone: phone,
+              user: user,
+              password: password,
+            );
+          });
         }
       } else {
         MyDialog().normalDialog(context, "User false!", "Please change user");
@@ -212,8 +238,23 @@ class _CreateAccountState extends State<CreateAccount> {
     });
   }
 
-  Future<void> processInsertMySQL() async {
-    print("Process work");
+  Future<void> processInsertMySQL({
+    String? name,
+    String? address,
+    String? phone,
+    String? user,
+    String? password,
+  }) async {
+    String apiInsertUser =
+        "${MyConstant.domain}/marketplace/insertUser.php?isAdd=true&name=$name&type=$typeUser&address=$address&phone=$phone&user=$user&password=$password&avatar=$avatar&lat=$lat&lng=$lng";
+    await Dio().get(apiInsertUser).then((value) {
+      if (value.toString() == 'true') {
+        Navigator.pop(context);
+      } else {
+        MyDialog().normalDialog(
+            context, "Can not create", "Please try again create new user");
+      }
+    });
   }
 
   Set<Marker> setMarker() => <Marker>{
