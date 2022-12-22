@@ -3,14 +3,14 @@ import 'package:flutter_marketplace/states/authen.dart';
 import 'package:flutter_marketplace/states/buyer_service.dart';
 import 'package:flutter_marketplace/states/create_account.dart';
 import 'package:flutter_marketplace/states/rider_service.dart';
-import 'package:flutter_marketplace/states/saler_service.dart';
+import 'package:flutter_marketplace/states/seller_service.dart';
 import 'constants/my_constant.dart';
 
 final Map<String, WidgetBuilder> map = {
   '/authen': (BuildContext context) => const Authen(),
   '/createAccount': (BuildContext context) => const CreateAccount(),
   '/buyerService': (BuildContext context) => const BuyerService(),
-  '/salerService': (BuildContext context) => const SalerService(),
+  '/sellerService': (BuildContext context) => const SellerService(),
   '/riderService': (BuildContext context) => const RiderService(),
 };
 
@@ -36,4 +36,4 @@ class MyApp extends StatelessWidget {
 }
 
 
-// https://www.youtube.com/watch?v=fpidPPtqnao&list=PLHk7DPiGKGNBDt1rPlVPCDVlV0ggqzbNy&index=35
+// https://www.youtube.com/watch?v=n7ItOrPZEXM&list=PLHk7DPiGKGNBDt1rPlVPCDVlV0ggqzbNy&index=36

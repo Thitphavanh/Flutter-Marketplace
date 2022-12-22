@@ -10,6 +10,10 @@ class BuyerService extends StatefulWidget {
 class _BuyerServiceState extends State<BuyerService> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Buyer"),
+      ),
+    );
   }
 }
